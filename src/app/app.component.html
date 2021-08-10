@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h1 class="text-center">User List</h1>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">First Name</th>
+            <th class="text-center">Last Name</th>
+            <th class="text-center">Date de naissance</th>
+
+            <th class="text-center">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.naissance }}</td>
+            <td>
+              <table class="table table-bordered table-striped table-hover">
+              <thead>
+              <tr>
+                <th class="text-center">type d adresse</th>
+                <th class="text-center">type_voie</th>
+                <th class="text-center">rue </th>
+                <th class="text-center">numero</th>
+                <th class="text-center">&nbsp;</th>
+              </tr>
+              </thead>
+                <tbody>
+                <tr *ngFor="let blogs of user.Blocs">
+                  <td>{{ blogs.type_adress }}</td>
+                  <td>{{ blogs.type_voie }}</td>
+                  <td>{{ blogs.rue }}</td>
+                  <td>{{ blogs.numero }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+
+            <td>
+              <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditUserForm(user)">Edit</button>
+
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeUser(user)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" (click)="showAddUserForm()">Add New contact</button>
+
+      <div class="mt-4">
+        <form *ngIf="userForm">
+          <h2>Add New Contact</h2>
+          <p>First Name: <input type="text" name="firstName" [(ngModel)]="newUser.firstName" /></p>
+          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="newUser.lastName" /></p>
+          <p>naissance : <input type="text" name="naissance" [(ngModel)]="newUser.naissance" /></p>
+          <p>type d adresse : <input type="text" name="naissance" [(ngModel)]="newUser.Blocs.type_adress" /></p>
+
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="saveUser(newUser)">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelNewUser()">Cancel</button>
+          </p>
+        </form>
+
+        <form *ngIf="editUserForm">
+          <h2>Edit contact Details</h2>
+          <p>First Name: <input type="text" name="firstName" [(ngModel)]="editedUser.firstName" /></p>
+          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="editedUser.lastName" /></p>
+          <p>naissance: <input type="text" name="naissance" [(ngModel)]="editedUser.naissance" /></p>
+
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="updateUser()">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
